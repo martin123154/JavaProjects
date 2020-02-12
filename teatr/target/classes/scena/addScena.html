@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Baza Teatru</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body class = index>
+<div>
+			<div>
+				<h3>Dodaj scene</h3>
+				<br />
+
+				<form action="/teatr/rest/scena/addScena" method="post">
+					<div>
+						<label for="nazwa">Nazwa:</label>
+
+						<div>
+							<input type="text" name="nazwa" id="nazwa">
+						</div>
+					</div>
+
+					<div>
+						<label for="wielkosc">Wielkosc:</label>
+
+						<div>
+							<input type="text" name="wielkosc" id="wielkosc">
+						</div>
+					</div>
+
+					<div>
+						<div>
+							<button type="submit">Add</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			 <a class="btn btn-default" href="showScena.html"><b><font color="red">Zobacz wszystkie sceny</font></b></a><br><br>
+			  <a class="btn btn-default" href="../index.html"><b><font color="red">Strona główna</font></b></a><br><br>
+
+
+
+
+
+
+
+</body>
+</html>

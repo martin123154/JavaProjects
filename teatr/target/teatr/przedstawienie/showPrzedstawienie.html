@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lista przedstawień</title>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <script>
+    $(document).ready(function()
+    		{
+    		      $.get("/teatr/rest/przedstawienie/getAllPrzedstawienia", function(data, textStatus)
+    		      {
+    		              var table = document.getElementById('presentationTable');
+
+    		              for(var i in data) {
+    		                    var row = document.createElement("tr");
+
+    		                    var cellID = document.createElement("td");
+    		                    var cellIDText = document.createTextNode(data[i].idPrzedstawienie);  
+    		                    var cellTytul = document.createElement("td");
+    		                    var cellTytulText = document.createTextNode(data[i].tytul);
+    		                    var cellDatarozp = document.createElement("td");
+    		                    var cellDatarozpText = document.createTextNode(data[i].data_rozp);
+    		                    var cellDatazak = document.createElement("td");
+    		                    var cellDatazakText = document.createTextNode(data[i].data_zak);
+    		                    var cellScena = document.createElement("td");
+    		                    var cellScenaText = document.createTextNode(data[i].scena.nazwa + " " + data[i].scena.wielkosc);
+
+
+    		                    cellID.appendChild(cellIDText);
+    		                    cellTytul.appendChild(cellTytulText);
+    		                    cellDatarozp.appendChild(cellDatarozpText);
+    		                    cellDatazak.appendChild(cellDatazakText);
+    		                    cellScena.appendChild(cellScenaText);
+    		                    
+    		                   var cellRead = document.createElement("td");
+    		                    var cellReadLink = document.createElement("a");
+    		                    cellReadLink.href = "readPrzedstawienie.html?id=" + data[i].idPrzedstawienie;
+    		                    cellReadLink.textContent = "PODGLĄD";
+    		                    cellRead.appendChild(cellReadLink);
+    		                    
+    		                    var cellUpdate = document.createElement("td");
+    		                    var cellUpdateLink = document.createElement("a");
+    		                    cellUpdateLink.href = "updatePrzedstawienie.html?id=" + data[i].idPrzedstawienie;
+    		                    cellUpdateLink.textContent = "ZMIEŃ";
+    		                    cellUpdate.appendChild(cellUpdateLink);
+    		                    
+    		                    var cellDelete = document.createElement("td");
+    		                    var cellDeleteLink = document.createElement("a");
+    		                    cellDeleteLink.href = "deletePrzedstawienie.html?id=" + data[i].idPrzedstawienie;
+    		                    cellDeleteLink.textContent = "USUŃ";
+    		                    cellDelete.appendChild(cellDeleteLink);
+    		                    
+    		                    row.appendChild(cellID);
+    		                    row.appendChild(cellTytul);
+    		                    row.appendChild(cellDatarozp);
+    		                    row.appendChild(cellDatazak);
+    		                    row.appendChild(cellScena);
+    		                    row.appendChild(cellRead);
+    		                    row.appendChild(cellUpdate);
+    		                    row.appendChild(cellDelete); 
+
+    		                    table.appendChild(row);
+    		              }
+    		      });
+    		});
+    
+    </script>
+</head>
+<body>
+
+        <a href="addPrzedstawienie.html">
+            <div class="opbutton">
+                Dodaj nowe przedstawienie
+            </div>
+        </a>
+
+
+    <table class="presentationTable" id="presentationTable" align="center">
+            <tr class="tableheader" id="tableheader">
+                <td>ID</td>
+                <td>Tytuł</td>
+                <td>Data rozpoczęcia</td>
+                <td>Data zakończenia</td>
+                <td>Scena</td>
+
+                 
+              
+            </tr>
+
+
+
+    </table>
+</body>
+</html>

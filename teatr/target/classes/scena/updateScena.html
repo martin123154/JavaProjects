@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Zaktualizuj scene</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script>
+$(document).ready(function()
+		{
+		    var id = window.location.search.replace("?id=", "");
+
+		    document.getElementById('idScenaID').value = id;
+
+		    $.get("/teatr/rest/scena/getScena/" + id, function(data, textStatus)
+		    {
+		       document.getElementById('id').innerHTML = data.idScena;
+		       document.getElementById('nazwaID').value = data.nazwa;
+		       document.getElementById('wielkoscID').value = data.wielkosc;
+		    });
+		});
+</script>
+</head>
+<body>
+<form action="/teatr/rest/scena/updateScena" method="post">
+    <input type="text" id="idScenaID" name="idScena" style="visibility: hidden;"/>
+    <table class="operationtable">
+        <tr class='tableheader'>
+            <td colspan='2'>Edycja pracownika</td>
+        </tr>
+        <tr>
+            <td>ID:</td>
+            <td id="id"></td>
+        </tr>
+        <tr>
+            <td>Nazwa:</td>
+            <td><input type="text" id="nazwaID" name="nazwa" /></td>
+        </tr>
+        <tr>
+            <td>Wielkosc:</td>
+            <td><input type="text" id="wielkoscID" name="wielkosc" /></td>
+        </tr>
+      
+        <tr>
+            <td colspan="2"><input type="submit" value="APISZ ZMIANY" align="right"></td>
+        </tr>
+    </table>
+
+</form>
+	 <a class="btn btn-default" href="showScena.html"><b><font color="red">Zobacz wszystkie sceny</font></b></a><br><br>
+			  <a class="btn btn-default" href="addScena.html"><b><font color="red">Dodaj scene</font></b></a><br><br>
+			  <a class="btn btn-default" href="../index.html"><b><font color="red">Strona główna</font></b></a><br><br>
+
+</body>
+</html>

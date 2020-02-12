@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Aktualizuj przedstawienie</title>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+ <script>
+ 
+ $(document).ready(function()
+		 {
+		     var id = window.location.search.replace("?id=", "");
+
+		     document.getElementById('idPrzedstawienieID').value = id;
+
+
+		     $.get("/teatr/rest/scena/getAllSceny", function(data, textStatus)
+		     {
+		        var scenaSelect = document.getElementById('scenaID');
+
+		        for(var i in data) {
+		             var opt = document.createElement('option');
+
+		             var scenaInfo = data[i].idScena + " " + data[i].nazwa + " " + data[i].wielkosc;
+
+		             opt.value = scenaInfo;
+		             opt.innerHTML = scenaInfo;
+		             scenaSelect.appendChild(opt);
+		        }
+		     });
+		     $.get("/teatr/rest/przedstawienie/getPrzedstawienie/" + id, function(data, textStatus)
+		    		    {
+		    		       document.getElementById('id').innerHTML = data.idPrzedstawienie;
+		    		       document.getElementById('tytulID').value = data.tytul;
+		    		       document.getElementById('data_rozp').value = data.data_rozp;
+		    		       document.getElementById('data_zak').value = data.data_zak;
+		    		   
+		    		       document.getElementById('scenaID').value = data.scena.idScena + ". " + data.scena.nazwa + " " + data.scena.wielkosc;
+		    		    });
+		 });
+ 
+ </script>
+</head>
+
+<body>
+
+<form action="/teatr/rest/przedstawienie/updatePrzedstawienie" method="post">
+    <input type="text" id="idPrzedstawienieID" name="idPrzedstawienie" style="visibility: hidden;"/>
+    <table class="operationtable">
+        <tr class='tableheader'>
+            <td colspan='2'>Edycja przedstawienia</td>
+        </tr>
+        <tr>
+            <td>ID:</td>
+            <td id="id"></td>
+        </tr>
+        <tr>
+            <td>Scena:</td>
+            <td>
+                <select name="scenaID" id="scenaID">
+                </select>
+            </td>
+        </tr>
+       
+        <tr>
+            <td>Tytuł:</td>
+            <td><input type="text" name="tytul" id="tytulID" /></td>
+        </tr>
+        <tr>
+            <td>Data rozpoczęcia:</td>
+            <td><input id="data_rozp" type="text" name="data_rozp" /></td>
+        </tr>
+        <tr>
+            <td>Data zakończenia:</td>
+            <td><input id="data_zak" type="text" name="data_zak" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value=" ZAPISZ ZMIANY " align="right"></td>
+        </tr>
+    </table>
+</form>
+
+
+
+
+    <a class="btn btn-default" href="ddPrzedstawienie.html"><b><font color="red">Dodaj przedstawienie</font></b></a><br><br>
+			   <a class="btn btn-default" href="showPrzedstawienie.html"><b><font color="red">Zobacz wszystkie przedstawienia</font></b></a>
+</body>
+</html>

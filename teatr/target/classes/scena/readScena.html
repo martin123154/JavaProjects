@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Zobacz scene</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <script>
+    
+    $(document).ready(function()
+    		{
+    		    var id = window.location.search.replace("?id=", "");
+
+    		    $.get("/teatr/rest/scena/getScena/" + id, function(data, textStatus)
+    		    {
+    		       document.getElementById('id').innerHTML = data.idScena;
+    		       document.getElementById('nazwa').innerHTML = data.nazwa;
+    		       document.getElementById('wielkosc').innerHTML = data.wielkosc;
+    		    });
+    		});
+    </script>
+</head>
+
+<body>
+<form action="showScena.html" method="post">
+    <table class="operationtable">
+        <tr class='tableheader'>
+            <td colspan='2'>Zobacz scene</td>
+        </tr>
+        <tr>
+            <td>ID:</td>
+            <td id="id"></td>
+        </tr>
+        <tr>
+            <td>Nazwa:</td>
+            <td id="nazwa"></td>
+        </tr>
+        <tr>
+            <td>Wielkosc:</td>
+            <td id="wielkosc"></td>
+        </tr>
+       
+        <tr>
+            <td colspan="2"><input type="submit" value=" POWRÓT " align="right"></td>
+        </tr>
+    </table>
+   
+</form>
+	 <a class="btn btn-default" href="showScena.html"><b><font color="red">Zobacz wszystkie sceny</font></b></a><br><br>
+			  <a class="btn btn-default" href="addScena.html"><b><font color="red">Dodaj scene</font></b></a><br><br>
+			  <a class="btn btn-default" href="../index.html"><b><font color="red">Strona główna</font></b></a><br><br>
+
+</body>
+</html>

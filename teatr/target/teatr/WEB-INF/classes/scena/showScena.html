@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Sceny</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script>
+$(document).ready(function()
+		{
+		      $.get("/teatr/rest/scena/getAllSceny", function(data, textStatus)
+		      {
+		              var table = document.getElementById('presentationTable');
+
+		              for(var i in data) {
+		                    var row = document.createElement("tr");
+
+		                    var cellID = document.createElement("td");
+		                    var cellIDText = document.createTextNode(data[i].idScena);
+		                    var cellNazwa = document.createElement("td");
+		                    var cellNazwaText = document.createTextNode(data[i].nazwa);
+		                    var cellWielkosc = document.createElement("td");
+		                    var cellWielkoscText = document.createTextNode(data[i].wielkosc);
+		                   
+		                    cellID.appendChild(cellIDText);
+		                    cellNazwa.appendChild(cellNazwaText);
+		                    cellWielkosc.appendChild(cellWielkoscText);
+
+
+		                    var cellRead = document.createElement("td");
+		                    var cellReadLink = document.createElement("a");
+		                    cellReadLink.href = "readScena.html?id=" + data[i].idScena;
+		                    cellReadLink.textContent = "PODGLĄD";
+		                    cellRead.appendChild(cellReadLink);
+		                    
+		                    var cellUpdate = document.createElement("td");
+		                    var cellUpdateLink = document.createElement("a");
+		                    cellUpdateLink.href = "updateScena.html?id=" + data[i].idScena;
+		                    cellUpdateLink.textContent = "ZMIEŃ";
+		                    cellUpdate.appendChild(cellUpdateLink);
+		                    
+		                    var cellDelete = document.createElement("td");
+		                    var cellDeleteLink = document.createElement("a");
+		                    cellDeleteLink.href = "deleteScena.html?id=" + data[i].idScena;
+		                    cellDeleteLink.textContent = "USUŃ";
+		                    cellDelete.appendChild(cellDeleteLink);
+		                    
+		                    row.appendChild(cellID);
+		                    row.appendChild(cellNazwa);
+		                    row.appendChild(cellWielkosc);
+		                    row.appendChild(cellRead);
+		                    row.appendChild(cellUpdate);
+		                    row.appendChild(cellDelete);
+		
+
+		                    table.appendChild(row);
+		              }
+		      });
+		});
+</script>
+</head>
+
+<body>
+
+
+
+    <table class="presentationTable" id="presentationTable" align="center">
+            <tr class="tableheader" id="tableheader">
+                <td>ID</td>
+                <td>Nazwa</td>
+                <td>Wielkosc</td>
+                <td>Operacje</td>
+            </tr>
+
+
+        <div id="tablePlaceholder"></div>
+
+    </table>
+     <a class="btn btn-default" href="addScena.html"><b><font color="red">Dodaj scene</font></b></a><br><br>
+     <a class="btn btn-default" href="../index.html"><b><font color="red">Strona główna</font></b></a><br><br>
+</body>
+</html>

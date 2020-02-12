@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Podgląd przedstawienia</title>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<script>
+$(document).ready(function()
+		{
+		    var id = window.location.search.replace("?id=", "");
+
+		    $.get("/teatr/rest/przedstawienie/getPrzedstawienie/" + id, function(data, textStatus)
+		    {
+		       document.getElementById('id').innerHTML = data.idPrzedstawienie;
+		       document.getElementById('scena').innerHTML = data.scena.nazwa + " " + data.scena.wielkosc;
+		       document.getElementById('tytul').innerHTML = data.tytul;
+		       document.getElementById('data_rozp').innerHTML = data.data_rozp;
+		       document.getElementById('data_zak').innerHTML = data.data_zak;
+		    });
+		});
+
+</script>
+</head>
+<body>
+<form action="showPrzedstawienie.html" method="post">
+    <table class="operationtable">
+        <tr class='tableheader'>
+            <td colspan='2'>Podgląd przedstawienia</td>
+        </tr>
+        <tr>
+            <td>ID:</td>
+            <td id="id"></td>
+        </tr>
+        <tr>
+            <td>Scena:</td>
+            <td id="scena"></td>
+        </tr>
+        <tr>
+            <td>Tytul:</td>
+            <td id="tytul"></td>
+        </tr>
+        <tr>
+            <td>Data rozpoczęcia:</td>
+            <td id="data_rozp"></td>
+        </tr>
+        <tr>
+            <td>Data zakończenia:</td>
+            <td id="data_zak"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value=" POWRÓT " align="right"></td>
+        </tr>
+    </table>
+</form>
+    <a class="btn btn-default" href="addPrzedstawienie.html"><b><font color="red">Dodaj przedstawienie</font></b></a><br><br>
+			   <a class="btn btn-default" href="showPrzedstawienie.html"><b><font color="red">Zobacz wszystkie przedstawienia</font></b></a>
+</body>
+</html>
